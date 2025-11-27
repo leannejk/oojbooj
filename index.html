@@ -51,23 +51,67 @@
 
 <body>
     <h1>Ooj Booj Score</h1>
-    <div class="score" id="score">12.601</div>
+    <div class="score" id="score">12.6</div>
 
-    <!-- Only one input -->
     <input type="text" id="secretInput" placeholder="Enter secret word">
 
     <script>
         const input = document.getElementById('secretInput');
         const scoreEl = document.getElementById('score');
 
+        const SECRETS = ["oojale", "boojale", "raanana", "oojaleboojale"];
+        const COOKIE_NAME = "oojBoojScore";
+
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days*24*60*60*1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            const cname = name + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(cname) === 0) {
+                    return c.substring(cname.length, c.length);
+                }
+            }
+            return null;
+        }
+
+        // Initialize score from cookie if exists
+        (function initScoreFromCookie() {
+            const saved = getCookie(COOKIE_NAME);
+            if (saved !== null && !isNaN(parseFloat(saved))) {
+                scoreEl.textContent = parseFloat(saved).toFixed(3);
+            }
+        })();
+
         input.addEventListener('keydown', (e) => {
             if (e.key === "Enter") {
-                if (input.value.trim().toLowerCase() === "oojale") {
+                const value = input.value.trim().toLowerCase();
+
+                if (SECRETS.includes(value)) {
                     let current = parseFloat(scoreEl.textContent);
+                    if (isNaN(current)) {
+                        current = 0;
+                    }
+
                     let randomAdd = Math.random() * (0.01 - 0.001) + 0.001;
-                    scoreEl.textContent = (current + randomAdd).toFixed(3);
+                    const newScore = current + randomAdd;
+
+                    // Update UI
+                    scoreEl.textContent = newScore.toFixed(3);
+
+                    // Persist in cookie for 365 days
+                    setCookie(COOKIE_NAME, newScore.toFixed(3), 365);
                 }
-                input.value = ""; // clear after submit
+
+                // Always clear after submit
+                input.value = "";
             }
         });
     </script>
