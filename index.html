@@ -14,6 +14,7 @@
         font-family: Arial, sans-serif;
         color: #ffffff;
         text-align: center;
+
         background: linear-gradient(135deg, #ff6ec4, #7873f5, #4ade80, #facc15);
         background-size: 400% 400%;
         animation: gradient 12s ease infinite;
@@ -33,15 +34,11 @@
     }
 
     input {
-        margin-top: 15px;
+        margin-top: 20px;
         padding: 10px 15px;
         border-radius: 8px;
         border: none;
-        font-size: 1.2rem;
-    }
-
-    #addScoreInput {
-        display: none; /* stays hidden until secret word typed */
+        font-size: 1.3rem;
     }
 
     @keyframes gradient {
@@ -56,32 +53,22 @@
     <h1>Ooj Booj Score</h1>
     <div class="score" id="score">12.601</div>
 
-    <!-- Secret word input -->
+    <!-- Only one input -->
     <input type="text" id="secretInput" placeholder="Enter secret word">
 
-    <!-- Hidden input that appears once 'oojale' is entered -->
-    <input type="text" id="addScoreInput" placeholder="Add score trigger">
-
     <script>
-        const secretInput = document.getElementById('secretInput');
-        const addScoreInput = document.getElementById('addScoreInput');
+        const input = document.getElementById('secretInput');
         const scoreEl = document.getElementById('score');
 
-        // Reveal second input when secret word is correct
-        secretInput.addEventListener('input', () => {
-            if (secretInput.value.trim().toLowerCase() === "oojale") {
-                addScoreInput.style.display = "block";
-            } else {
-                addScoreInput.style.display = "none";
+        input.addEventListener('keydown', (e) => {
+            if (e.key === "Enter") {
+                if (input.value.trim().toLowerCase() === "oojale") {
+                    let current = parseFloat(scoreEl.textContent);
+                    let randomAdd = Math.random() * (0.01 - 0.001) + 0.001;
+                    scoreEl.textContent = (current + randomAdd).toFixed(3);
+                }
+                input.value = ""; // clear after submit
             }
-        });
-
-        // When typing in second input, increase score by random 0.001–0.01
-        addScoreInput.addEventListener('input', () => {
-            let current = parseFloat(scoreEl.textContent);
-            let randomAdd = (Math.random() * (0.01 - 0.001) + 0.001);
-            let newScore = current + randomAdd;
-            scoreEl.textContent = newScore.toFixed(3);
         });
     </script>
 
