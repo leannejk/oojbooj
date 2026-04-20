@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ooj Booj Squads</title>
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        color: #ffffff;
+        text-align: center;
+
+        background: linear-gradient(135deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+    }
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        padding: 18px 0;
+        background: rgba(0,0,0,0.15);
+        backdrop-filter: blur(6px);
+    }
+
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        padding: 6px 14px;
+        border-radius: 8px;
+        transition: background 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+        background: rgba(255,255,255,0.2);
+    }
+
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 40px 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin: 0 0 30px;
+        text-shadow: 0 0 12px rgba(0,0,0,0.3);
+    }
+
+    .squads {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .squads li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(6px);
+        border-radius: 12px;
+        padding: 16px 22px;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .squad-name {
+        font-weight: bold;
+    }
+
+    .squad-lead {
+        opacity: 0.9;
+    }
+
+    .squad-lead::before {
+        content: "Lead: ";
+        opacity: 0.7;
+        font-weight: normal;
+    }
+
+</style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="squads.html" class="active">Squads</a>
+    </nav>
+
+    <main>
+        <h1>Squads</h1>
+        <ul class="squads">
+            <li>
+                <span class="squad-name">Dishes</span>
+                <span class="squad-lead">Koral</span>
+            </li>
+            <li>
+                <span class="squad-name">Laundry</span>
+                <span class="squad-lead">Leanne</span>
+            </li>
+            <li>
+                <span class="squad-name">Trash</span>
+                <span class="squad-lead">Koral</span>
+            </li>
+            <li>
+                <span class="squad-name">Sweep</span>
+                <span class="squad-lead">Robo</span>
+            </li>
+            <li>
+                <span class="squad-name">Plants</span>
+                <span class="squad-lead">Leanne</span>
+            </li>
+            <li>
+                <span class="squad-name">Bills</span>
+                <span class="squad-lead">Leanne</span>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
